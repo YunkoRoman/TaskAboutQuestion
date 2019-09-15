@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {element} from "protractor";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,27 +14,12 @@ export class AppComponent {
   public showVideoBox: boolean = false;
   public answer1: any= 'right';
   public answer2: any = 'wrong';
-  public answer3: any;
-  public listenQuestion: any = [
+  public _questions: any = [
     {
       id: 1,
       name: 'Питання 1',
       right: '',
-    },
-    {
-      id: 2,
-      name: 'Питання 2',
-      right: ''
-    },
-    {
-      id: 3,
-      name: 'Питання 3',
-      right: ''
-    }];
-  public _questions: any = [
-    {
-      id: 1,
-      right: 3,
+      rightQuestion: 3,
       description: 'Питання 1.Якого періоду це авто',
       path: [
         {photo: "https://autowise.com/wp-content/uploads/2018/06/1970-Chevelle-SS454-e1552294336396.jpg"}
@@ -67,8 +50,10 @@ export class AppComponent {
     },
     {
       id: 2,
+      name: 'Питання 2',
+      right: '',
       description: 'Питання 2 .На якому фото зображений Plymouth Road Runner',
-      right: 2,
+      rightQuestion: 2,
       listOfAnswers: [
         {
           id: 1,
@@ -100,7 +85,9 @@ export class AppComponent {
     },
     {
       id: 3,
-      right: 3,
+      name: 'Питання 3',
+      right: '',
+      rightQuestion: 3,
       listOfAnswers: [
         {
           id: 1,
@@ -141,7 +128,7 @@ export class AppComponent {
         this.visio.path = a.path;
         this.visio.description = a.description;
         this.visio.listOfAnswers = a.listOfAnswers;
-        this.visio.right = a.right;
+        this.visio.rightQuestion = a.rightQuestion;
         this.showBtn = true;
         this.visio.path.forEach(e => {
           if (e.video) {
@@ -156,9 +143,6 @@ export class AppComponent {
 //Кнопка перевірки на правельність відповіді
   sendAnswer(AnswerForm: NgForm) {
     AnswerForm.value.answer.forEach(a => {
-      // if (a.id === 1) this.answer1 = a.answer;
-      // if (a.id === 2) this.answer2 = a.answer;
-      // if (a.id === 3) this.answer3 = a.answer;
       if (a.right === true) alert('Це правильна відповідь');
       if (a.right === false) alert(`Це не правильна відповідь, правильна відповідь під номером ${a.rightAnswer} `);
       //Зміна кольору кнопки відповідно чи дана відповідь правильно
@@ -201,12 +185,12 @@ export class AppComponent {
       }
     })
   }
-  //функція яка змінює значення в масиві
+  //функція яка змінює значення в об'єкті
   changeDesc( value, desc ) {
-    for (let i in this.listenQuestion) {
-      if (this.listenQuestion[i].id == value) {
-        this.listenQuestion[i].right = desc;
-        console.log(this.listenQuestion[i].right = desc);
+    for (let i in this._questions) {
+      if (this._questions[i].id == value) {
+        this._questions[i].right = desc;
+        console.log(this._questions[i].right = desc);
         break; //Stop this loop, we found it!
       }
     }

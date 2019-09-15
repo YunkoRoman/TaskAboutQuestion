@@ -1,5 +1,5 @@
 <div class="box">
-  <div *ngFor="let ordelyNum of listenQuestion">
+  <div *ngFor="let ordelyNum of _questions ">
     <a routerLink="" (click)="showQuestion(ordelyNum.id)" class="Questions"
     [ngClass]="{
     'success':ordelyNum.right === answer1,
@@ -29,7 +29,7 @@
   <form class="answerForm" #AnswerForm="ngForm" (ngSubmit)="sendAnswer(AnswerForm)">
     <div *ngFor="let answer of visio.listOfAnswers">
       {{answer.answer}}
-      <input type="radio" name="answer" [value]="[{id:visio.id, rightAnswer: visio.right,  answer: answer.answer, right: answer.right}]" ngModel>
+      <input type="radio" name="answer" [value]="[{id:visio.id, rightAnswer: visio.rightQuestion,  answer: answer.answer, right: answer.right}]" ngModel>
     </div>
     <button *ngIf="showBtn"> Submit</button>
   </form>
