@@ -1,6 +1,11 @@
 <div class="box">
   <div *ngFor="let ordelyNum of listenQuestion">
-    <a routerLink="" (click)="showQuestion(ordelyNum.id)" class="Questions"> {{ordelyNum.name}} </a>
+    <a routerLink="" (click)="showQuestion(ordelyNum.id)" class="Questions"
+    [ngClass]="{
+    'success':ordelyNum.right === answer1,
+    'false':ordelyNum.right === answer2
+    }"
+    > {{ordelyNum.name}} </a>
   </div>
 </div>
 
