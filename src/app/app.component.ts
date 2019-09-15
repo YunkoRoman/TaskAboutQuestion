@@ -12,13 +12,13 @@ export class AppComponent {
   public visio: any = {};
   public showBtn: boolean = false;
   public showVideoBox: boolean = false;
-  public answer1: any= 'right';
-  public answer2: any = 'wrong';
+  public answer1: boolean = true ;
+  public answer2: boolean = false;
   public _questions: any = [
     {
       id: 1,
       name: 'Питання 1',
-      right: '',
+      right: undefined,
       rightQuestion: 3,
       description: 'Питання 1.Якого періоду це авто',
       path: [
@@ -51,7 +51,7 @@ export class AppComponent {
     {
       id: 2,
       name: 'Питання 2',
-      right: '',
+      right: undefined,
       description: 'Питання 2 .На якому фото зображений Plymouth Road Runner',
       rightQuestion: 2,
       listOfAnswers: [
@@ -86,7 +86,7 @@ export class AppComponent {
     {
       id: 3,
       name: 'Питання 3',
-      right: '',
+      right: undefined,
       rightQuestion: 3,
       listOfAnswers: [
         {
@@ -147,10 +147,10 @@ export class AppComponent {
       if (a.right === false) alert(`Це не правильна відповідь, правильна відповідь під номером ${a.rightAnswer} `);
       //Зміна кольору кнопки відповідно чи дана відповідь правильно
       if (a.right === true) {
-        this.changeDesc(a.id, 'right')
+        this.changeDesc(a.id, true)
       }
       if (a.right === false) {
-        this.changeDesc(a.id, 'wrong')
+        this.changeDesc(a.id, false)
       }
     });
 
@@ -165,11 +165,12 @@ export class AppComponent {
   }
 // Кнопка переходу на інше питання
   NextQuetion(id: number) {
+
     if (id >= 3) {
       id = 0
     }
     this._questions.forEach((a) => {
-      if (a.id === id + 1 ) {
+      if (a.id === id + 1) {
         this.visio.id = a.id;
         this.visio.path = a.path;
         this.visio.description = a.description;
